@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyWatchList - Koleksi Tontonan Pribadi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                    <polyline points="7 2 12 7 17 2"></polyline>
+                </svg>
+                <span>MyWatchList</span>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#beranda" class="nav-link">Beranda</a>
+                <a href="#tambah" class="nav-link">Tambah Tontonan</a>
+                <a href="#koleksi" class="nav-link">Koleksi Saya</a>
+                <a href="#statistik" class="nav-link">Statistik</a>
+                <a href="#tentang" class="nav-link">Tentang</a>
+            </div>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero">
+        <div class="hero-icons">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hero-icon">
+                <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                <polyline points="7 2 12 7 17 2"></polyline>
+            </svg>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hero-icon">
+                <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                <polyline points="17 2 12 7 7 2"></polyline>
+            </svg>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hero-icon">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            </svg>
+        </div>
+        
+        <h1 class="hero-title">Koleksi Tontonan Pribadi</h1>
+        <p class="hero-subtitle">Simpan semua film, anime, serial, dan drama favoritmu dalam satu tempat.</p>
+        
+        <div class="hero-buttons">
+            <a href="#tambah" class="btn btn-primary">Mulai Sekarang</a>
+            <a href="#koleksi" class="btn btn-secondary">Lihat Koleksi</a>
+        </div>
+    </section>
+
+    <!-- Form Tambah Tontonan -->
+    <section id="tambah" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tambah Tontonan</h2>
+                <p class="section-subtitle">Tambahkan tontonan favoritmu ke koleksi</p>
+            </div>
+
+            <form id="addForm" class="form-card">
+                <input type="hidden" id="editId">
+                
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="title">Judul Tontonan *</label>
+                        <input type="text" id="title" placeholder="Masukkan judul tontonan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genre">Genre *</label>
+                        <input type="text" id="genre" placeholder="Action, Drama, Sci-Fi" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Tahun Rilis *</label>
+                        <input type="text" id="year" placeholder="2024" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">Rating (1-10): <span id="ratingValue">5</span></label>
+                        <input type="range" id="rating" min="1" max="10" value="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="watched">Sudah Ditonton</option>
+                            <option value="watching">Sedang Ditonton</option>
+                            <option value="plan-to-watch" selected>Ingin Ditonton</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Kategori</label>
+                        <select id="category">
+                            <option value="movie">Film</option>
+                            <option value="anime">Anime</option>
+                            <option value="series">Donghua</option>
+                            <option value="kdrama">Drama China</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="poster">URL Poster (Opsional)</label>
+                        <input type="text" id="poster" placeholder="https://example.com/poster.jpg">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="url">URL Tontonan (Opsional)</label>
+                        <input type="text" id="url" placeholder="https://netflix.com/watch/...">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="notes">Catatan Pribadi</label>
+                        <textarea id="notes" rows="3" placeholder="Tulis catatan atau review singkat..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary full-width" id="submitBtn">
+                        <span id="submitText">Simpan Tontonan</span>
+                    </button>
+                    <button type="button" class="btn btn-cancel" id="cancelBtn" style="display: none;">
+                        Batal
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Koleksi -->
+    <section id="koleksi" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Koleksi Saya</h2>
+                <p class="section-subtitle">Total: <span id="totalCount">0</span> tontonan</p>
+            </div>
+
+            <div class="filters">
+                <div class="search-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Cari berdasarkan judul...">
+                </div>
+
+                <div class="filter-grid">
+                    <select id="filterStatus">
+                        <option value="all">Semua Status</option>
+                        <option value="watched">Sudah Ditonton</option>
+                        <option value="watching">Sedang Ditonton</option>
+                        <option value="plan-to-watch">Ingin Ditonton</option>
+                    </select>
+
+                    <select id="filterCategory">
+                        <option value="all">Semua Kategori</option>
+                        <option value="movie">Film</option>
+                        <option value="anime">Anime</option>
+                        <option value="series">Donghua</option>
+                        <option value="kdrama">Drama China</option>
+                    </select>
+
+                    <select id="sortBy">
+                        <option value="rating">Urutkan: Rating Tertinggi</option>
+                        <option value="year">Urutkan: Tahun Terbaru</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="collectionGrid" class="collection-grid">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <p>Tidak ada tontonan ditemukan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistik -->
+    <section id="statistik" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Statistik</h2>
+                <p class="section-subtitle">Ringkasan koleksi tontonanmu</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card stat-total">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">Total Tontonan</div>
+                </div>
+
+                <div class="stat-card stat-watched">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="statWatched">0</div>
+                    <div class="stat-label">Sudah Ditonton</div>
+                </div>
+
+                <div class="stat-card stat-watching">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="statWatching">0</div>
+                    <div class="stat-label">Sedang Ditonton</div>
+                </div>
+
+                <div class="stat-card stat-plan">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="statPlan">0</div>
+                    <div class="stat-label">Ingin Ditonton</div>
+                </div>
+            </div>
+
+            <div class="average-card">
+                <div class="average-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </div>
+                <h3>Rating Rata-rata</h3>
+                <div class="average-value" id="averageRating">0.0</div>
+                <p>dari <span id="averageTotal">0</span> tontonan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tentang MyWatchList</h2>
+                <p class="section-subtitle about-desc">
+                    MyWatchList adalah aplikasi web pribadi yang membantu kamu mencatat dan mengelola
+                    semua film, anime, serial, dan drama yang sudah atau ingin kamu tonton.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                            <polyline points="7 2 12 7 17 2"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Koleksi Lengkap</h3>
+                    <p>Simpan film, anime, Donghua, dan drama China dalam satu tempat.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3>Mudah Digunakan</h3>
+                    <p>Interface modern dan intuitif untuk mengelola koleksi tontonanmu.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                        </svg>
+                    </div>
+                    <h3>Data Tersimpan</h3>
+                    <p>Semua data tersimpan secara lokal dan tidak akan hilang.</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Kenapa MyWatchList?</h3>
+                <p>
+                    Dengan MyWatchList, kamu tidak perlu lagi khawatir lupa tontonan apa yang sudah kamu tonton
+                    atau yang ingin kamu tonton selanjutnya. Semua tersimpan rapi dan terorganisir dengan baik.
+                </p>
+                <p>
+                    Data disimpan secara lokal di browser kamu menggunakan localStorage, jadi privasi kamu
+                    terjaga dan data tidak akan hilang meskipun halaman di-refresh.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                <polyline points="7 2 12 7 17 2"></polyline>
+            </svg>
+            <span>MyWatchList</span>
+        </div>
+        <p class="footer-made">
+            Dibuat dengan 
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            untuk pecinta film dan serial
+        </p>
+        <p class="footer-copyright">&copy; <span id="currentYear"></span> MyWatchList. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
